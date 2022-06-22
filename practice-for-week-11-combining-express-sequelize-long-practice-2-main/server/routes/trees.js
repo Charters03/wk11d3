@@ -132,7 +132,9 @@ router.post('/', async (req, res, next) => {
  *     - Value: Tree not found
  */
 router.delete('/:id', async (req, res, next) => {
+    const tree = await Tree.findByPk(req.params.id);
     try {
+        await tree.destroy();
         res.json({
             status: "success",
             message: `Successfully removed tree ${req.params.id}`,
@@ -182,7 +184,19 @@ router.delete('/:id', async (req, res, next) => {
  */
 router.put('/:id', async (req, res, next) => {
     try {
-        // Your code here
+        const tree = await Tree.findByPk(req.params.id);
+        const {id, name, location, height, size} = req.body;
+
+        tree.id = id;
+        tree.tree = name;
+        tree.location = location;
+        tree.heightFt = height;
+        tree.groundCircumferenceFt = size;
+
+        await tree.save();
+
+        res.json({message: "successfully updated!", tree});
+
     } catch(err) {
         next({
             status: "error",
