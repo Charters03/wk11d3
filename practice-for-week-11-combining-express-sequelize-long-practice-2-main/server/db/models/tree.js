@@ -18,15 +18,15 @@ module.exports = (sequelize, DataTypes) => {
     location: DataTypes.STRING,
     heightFt: {
       type: DataTypes.FLOAT,
-      validate: {
-        min: 0,
-      }
+      // validate: {
+      //   min: 0,
+      // }
     },
     groundCircumferenceFt: {
       type: DataTypes.FLOAT,
-      validate: {
-        min: 0,
-      }
+      // validate: {
+      //   min: 0,
+      // }
     }
   }, {
     sequelize,
